@@ -4,7 +4,7 @@ Application web de gestion des salles et de leurs réservations, développée en
 objet sans framework complet (routeur, ORM, validation et conteneur d'injection installés
 via Composer).
 
-Réponses aux questions de l’étape 1
+Réponses aux questions de l’étape 0
 # 1. Quel est le rôle de Composer ?
 Composer est un gestionnaire de dépendances PHP. Il permet d’installer, mettre à jour et charger automatiquement les bibliothèques nécessaires au projet.
 
@@ -12,14 +12,14 @@ Composer est un gestionnaire de dépendances PHP. Il permet d’installer, mettr
 require : dépendances nécessaires au fonctionnement de l’application en production
 require-dev : dépendances utiles uniquement pendant le développement/tests (tests, outils, etc.)
 
-# 3. Pourquoi versionner composer.lock ?
+# 3. Pourquoi versionner composer.lock ?       
 Parce que cela verrouille les versions exactes des dépendances installées, ce qui garantit que tout le monde a le même environnement de travail et évite les écarts entre machines.
 
 # 4. Pourquoi ne versionne-t-on pas vendor/ ?
 Parce que vendor est généré automatiquement à partir de composer.json et composer.lock. Il est inutile et lourd à versionner, et il peut être recréé à tout moment avec composer install.
 
 
-Réponses aux questions de l’étape 2
+Réponses aux questions de l’étape 1
 # 1. Quel est le rôle de Composer ?
 Composer est le gestionnaire de dépendances de PHP.
 Il permet de :installer des bibliothèques PHP ,gérer leurs versions ,installer automatiquement leurs dépendances ,charger automatiquement les classes grâce à l’autoloading.
@@ -32,7 +32,21 @@ require-dev contient les dépendances utilisées uniquement pendant le développ
 composer.lock contient les versions exactes des dépendances installées , permet à un autre développeur ou au serveur d'installer exactement les mêmes versions.
 
 # 4. Pourquoi ne versionne-t-on pas vendor/ ?
-
 Le dossier vendor/ contient toutes les bibliothèques installées par Composer.
-
 Il peut être très volumineux et surtout, il peut être recréé automatiquement
+
+Réponses aux questions de l’étape 2
+# 1. Quel rôle joue Capsule\Manager ?
+Capsule\Manager est la classe qui permet de configurer et démarrer Eloquent lorsqu'on utilise Eloquent sans Laravel.
+
+# 2. Pourquoi Eloquent peut-il fonctionner sans Laravel ?
+Parce qu'Eloquent est un composant indépendant.
+Laravel utilise Eloquent, mais Eloquent n'appartient pas exclusivement à Laravel.
+
+# 3. Où doit se trouver le démarrage de l'ORM ?
+Le démarrage de l'ORM doit se trouver dans la configuration de l'application, pas dans les modèles, les contrôleurs ou les services.
+
+# 4. Quelle différence entre ORM et SQL écrit à la main ?
+C'est la différence la plus importante.
+Avec SQL écrit à la main ,tu écris directement la requête ,tu travailles directement avec SQL + PDO.
+Avec un ORM tu travailles avec tes classes et objets PHP , eloquent se charge de construire et d'exécuter la requête SQL nécessaire.
