@@ -1,18 +1,22 @@
 <h1>Liste des réservations</h1>
 
-<a href="/reservations/create">+ Nouvelle réservation</a>
+<a href="/reservations/create" class="btn">Nouvelle réservation</a>
 
-<form method="GET" action="/reservations">
-    <label for="salle_id">Filtrer par salle</label>
-    <select id="salle_id" name="salle_id" onchange="this.form.submit()">
-        <option value="">Toutes les salles</option>
-        <?php foreach ($salles as $salle): ?>
-            <option value="<?= (int) $salle->id ?>" <?= (isset($salleId) && $salleId === $salle->id) ? 'selected' : '' ?>>
-                <?= htmlspecialchars($salle->nom, ENT_QUOTES) ?>
-            </option>
-        <?php endforeach; ?>
-    </select>
-</form>
+<div class="filter-bar">
+    <form method="GET" action="/reservations">
+        <div class="form-group">
+            <label for="salle_id">Filtrer par salle</label>
+            <select id="salle_id" name="salle_id" onchange="this.form.submit()">
+                <option value="">Toutes les salles</option>
+                <?php foreach ($salles as $salle): ?>
+                    <option value="<?= (int) $salle->id ?>" <?= (isset($salleId) && $salleId === $salle->id) ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($salle->nom, ENT_QUOTES) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </form>
+</div>
 
 <table>
     <thead>
@@ -32,7 +36,11 @@
                 <td><?= htmlspecialchars($reservation->responsable, ENT_QUOTES) ?></td>
                 <td><?= $reservation->date_debut->format('d/m/Y H:i') ?></td>
                 <td><?= $reservation->date_fin->format('d/m/Y H:i') ?></td>
-                <td><?= htmlspecialchars($reservation->statut, ENT_QUOTES) ?></td>
+                <td>
+                    <span class="badge <?= $reservation->statut === 'confirmée' ? 'badge-confirmee' : 'badge-annulee' ?>">
+                        <?= htmlspecialchars($reservation->statut, ENT_QUOTES) ?>
+                    </span>
+                </td>
                 <td>
                     <a href="/reservations/<?= (int) $reservation->id ?>">Détail</a>
                 </td>

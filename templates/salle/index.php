@@ -1,6 +1,6 @@
 <h1>Liste des salles</h1>
 
-<a href="/salles/create">+ Ajouter une salle</a>
+<a href="/salles/create" class="btn">Ajouter une salle</a>
 
 <table>
     <thead>
@@ -20,7 +20,7 @@
                 <td><?= htmlspecialchars($salle->batiment, ENT_QUOTES) ?></td>
                 <td><?= htmlspecialchars((string) $salle->capacite, ENT_QUOTES) ?></td>
                 <td><?= htmlspecialchars($salle->type, ENT_QUOTES) ?></td>
-                <td><?= $salle->active ? 'Active' : 'Inactive' ?></td>
+                <td><span class="badge <?= $salle->active ? 'badge-active' : 'badge-inactive' ?>"><?= $salle->active ? 'Active' : 'Inactive' ?></span></td>
                 <td>
                     <a href="/salles/<?= (int) $salle->id ?>">Détail</a>
                     <a href="/salles/<?= (int) $salle->id ?>/edit">Modifier</a>

@@ -1,9 +1,268 @@
-body { font-family: sans-serif; max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
-nav a { margin-right: 1rem; }
-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-th, td { border: 1px solid #ccc; padding: 0.5rem; text-align: left; }
-.erreur { color: #c0392b; font-size: 0.9rem; }
-.alert-succes { background: #d4edda; color: #155724; padding: 0.75rem; border-radius: 4px; }
-form label { display: block; margin-top: 1rem; }
-form input, form select { width: 100%; padding: 0.4rem; }
-button { margin-top: 1rem; padding: 0.5rem 1rem; }
+:root {
+    --color-ink: #17233B;
+    --color-parchment: #F7F3EA;
+    --color-wine: #7B2D3E;
+    --color-wine-dark: #5F2130;
+    --color-moss: #4B6C4E;
+    --color-slate: #5B6472;
+    --color-gold: #C9A227;
+    --color-rust: #B65C38;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: var(--color-parchment);
+    color: #1B1B1B;
+    font-family: var(--font-body);
+    line-height: 1.55;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+}
+
+/* En-tête */
+.site-header {
+    background: #fff;
+    border-bottom: 2px solid var(--color-gold);
+    padding: 1.1rem 0;
+}
+
+.site-header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.site-title {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+}
+
+.site-nav a {
+    margin-left: 1.5rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+}
+
+.site-nav a:hover {
+    border-bottom-color: var(--color-wine);
+}
+
+/* Contenu */
+main {
+    padding: 2.5rem 1.25rem 3rem;
+}
+
+h1 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    margin: 0 0 1.5rem;
+    letter-spacing: -0.01em;
+}
+
+h2 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    margin: 2rem 0 1rem;
+}
+
+a {
+    color: var(--color-wine);
+}
+
+/* Liens simples (hors nav/boutons) */
+main a:not(.btn) {
+    text-decoration: none;
+    border-bottom: 1px solid rgba(123, 45, 62, 0.35);
+}
+
+main a:not(.btn):hover {
+    border-bottom-color: var(--color-wine);
+}
+
+/* Boutons */
+.btn {
+    display: inline-block;
+    background: var(--color-wine);
+    color: #fff !important;
+    padding: 0.65rem 1.3rem;
+    border: none;
+    border-radius: 4px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-decoration: none !important;
+    border-bottom: none !important;
+}
+
+.btn:hover {
+    background: var(--color-wine-dark);
+}
+
+/* Tables façon registre */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+}
+
+thead th {
+    text-align: left;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: none;
+    color: var(--color-slate);
+    border-bottom: 2px solid var(--color-ink);
+    padding: 0.6rem 0.6rem;
+}
+
+tbody td {
+    padding: 0.85rem 0.6rem;
+    border-bottom: 1px solid rgba(23, 35, 59, 0.12);
+    font-size: 0.95rem;
+}
+
+tbody tr:hover {
+    background: rgba(123, 45, 62, 0.04);
+}
+
+/* Badges de statut */
+.badge {
+    display: inline-block;
+    padding: 0.2rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.badge-active,
+.badge-confirmee {
+    background: rgba(75, 108, 78, 0.14);
+    color: var(--color-moss);
+}
+
+.badge-inactive,
+.badge-annulee {
+    background: rgba(91, 100, 114, 0.14);
+    color: var(--color-slate);
+}
+
+/* Listes de détail */
+.detail-list {
+    margin: 1.5rem 0;
+}
+
+.detail-list dt {
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--color-slate);
+    margin-top: 1rem;
+}
+
+.detail-list dd {
+    margin: 0.2rem 0 0;
+    font-size: 1.05rem;
+}
+
+/* Formulaires */
+.form-group {
+    margin-bottom: 1.4rem;
+    max-width: 480px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: var(--color-ink);
+    margin-bottom: 0.4rem;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.65rem 0.75rem;
+    border: 1px solid rgba(23, 35, 59, 0.25);
+    border-radius: 4px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    background: #fff;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: 2px solid var(--color-wine);
+    outline-offset: 1px;
+    border-color: var(--color-wine);
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.checkbox-group input {
+    width: auto;
+}
+
+/* Filtre */
+.filter-bar {
+    margin: 1rem 0;
+    max-width: 320px;
+}
+
+/* Messages */
+.alert-succes {
+    background: rgba(75, 108, 78, 0.12);
+    color: var(--color-moss);
+    padding: 0.85rem 1rem;
+    border-left: 3px solid var(--color-moss);
+    margin-bottom: 1.5rem;
+    border-radius: 2px;
+}
+
+.erreur {
+    color: var(--color-rust);
+    font-size: 0.85rem;
+    margin-top: 0.35rem;
+}
+
+/* Pied de page */
+.site-footer {
+    border-top: 1px solid rgba(23, 35, 59, 0.12);
+    padding: 2rem 0;
+    margin-top: 2rem;
+}
+
+.site-footer p {
+    color: var(--color-slate);
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+/* Actions dans les tables */
+td a {
+    margin-right: 0.75rem;
+    font-size: 0.9rem;
+}

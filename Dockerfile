@@ -2,7 +2,7 @@
 FROM composer:2 AS vendor
 WORKDIR /app
 COPY composer.json composer.lock ./
-RUN composer install --no-dev --no-interaction --optimize-autoloader --ignore-platform-reqs
+RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
 
 # Étape 2 : l'image finale avec PHP + Apache
 FROM php:8.3-apache
@@ -26,4 +26,5 @@ COPY . /var/www/html
 COPY --from=vendor /app/vendor /var/www/html/vendor
 
 WORKDIR /var/www/html
+RUN chown -R www-data:www-data /var/www/html
 EXPOSE 80
