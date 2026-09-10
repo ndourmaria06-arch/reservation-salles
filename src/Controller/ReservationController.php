@@ -62,13 +62,13 @@ final class ReservationController
 
     public function store(): string
     {
-        $donnees = [
-            'salle_id' => $_POST['salle_id'] ?? '',
-            'responsable' => $_POST['responsable'] ?? '',
-            'email' => $_POST['email'] ?? '',
-            'motif' => $_POST['motif'] ?? '',
-            'date_debut' => $_POST['date_debut'] ?? '',
-            'date_fin' => $_POST['date_fin'] ?? '',
+      $donnees = [
+        'salle_id' => $_POST['salle_id'] ?? '',
+        'responsable' => $_POST['responsable'] ?? '',
+        'email' => $_POST['email'] ?? '',
+        'motif' => $_POST['motif'] ?? '',
+        'date_debut' => str_replace('T', ' ', $_POST['date_debut'] ?? ''),
+        'date_fin' => str_replace('T', ' ', $_POST['date_fin'] ?? ''),
         ];
 
         $resultat = $this->validator->validate($donnees);
