@@ -64,6 +64,8 @@ final class SalleController
         $salle = new Salle($resultat->data());
         $this->salles->save($salle);
 
+        $this->definirMessageSucces('Salle créée avec succès.');
+
         header('Location: /salles');
         exit;
     }
@@ -110,12 +112,28 @@ final class SalleController
         $salle->fill($resultat->data());
         $this->salles->save($salle);
 
+        $this->definirMessageSucces('Salle modifiée avec succès.');
+
         header('Location: /salles/' . $salle->id);
         exit;
     }
 
-    private function renderPage(string $template, array $data, string $titre, ?string $messageSucces = null): string
+    private function definirMessageSucces(string $message): void
     {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        $_SESSION['succes'] = $message;
+    }
+
+    private function renderPage(string $template, array $data, string $titre): string
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        $messageSucces = $_SESSION['succes'] ?? null;
+        unset($_SESSION['succes']);
+
         $contenu = $this->view->render($template, $data);
 
         return $this->view->render('layout/base', [

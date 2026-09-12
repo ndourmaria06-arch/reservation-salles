@@ -62,13 +62,13 @@ final class ReservationController
 
     public function store(): string
     {
-      $donnees = [
-        'salle_id' => $_POST['salle_id'] ?? '',
-        'responsable' => $_POST['responsable'] ?? '',
-        'email' => $_POST['email'] ?? '',
-        'motif' => $_POST['motif'] ?? '',
-        'date_debut' => str_replace('T', ' ', $_POST['date_debut'] ?? ''),
-        'date_fin' => str_replace('T', ' ', $_POST['date_fin'] ?? ''),
+        $donnees = [
+            'salle_id' => $_POST['salle_id'] ?? '',
+            'responsable' => $_POST['responsable'] ?? '',
+            'email' => $_POST['email'] ?? '',
+            'motif' => $_POST['motif'] ?? '',
+            'date_debut' => str_replace('T', ' ', $_POST['date_debut'] ?? ''),
+            'date_fin' => str_replace('T', ' ', $_POST['date_fin'] ?? ''),
         ];
 
         $resultat = $this->validator->validate($donnees);
@@ -93,6 +93,8 @@ final class ReservationController
             ], 'Nouvelle réservation');
         }
 
+        $this->definirMessageSucces('Réservation créée avec succès.');
+
         header('Location: /reservations');
         exit;
     }
@@ -106,12 +108,28 @@ final class ReservationController
             return $this->renderPage('error/404', [], 'Réservation introuvable');
         }
 
+        $this->definirMessageSucces('Réservation annulée avec succès.');
+
         header('Location: /reservations/' . $id);
         exit;
     }
 
-    private function renderPage(string $template, array $data, string $titre, ?string $messageSucces = null): string
+    private function definirMessageSucces(string $message): void
     {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        $_SESSION['succes'] = $message;
+    }
+
+    private function renderPage(string $template, array $data, string $titre): string
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        $messageSucces = $_SESSION['succes'] ?? null;
+        unset($_SESSION['succes']);
+
         $contenu = $this->view->render($template, $data);
 
         return $this->view->render('layout/base', [

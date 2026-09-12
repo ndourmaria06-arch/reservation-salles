@@ -20,6 +20,10 @@ final class Application
 
     public function run(): void
     {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
         $dispatcher = simpleDispatcher(function (RouteCollector $r): void {
             (require __DIR__ . '/../routes/web.php')($r);
         });
