@@ -16,7 +16,7 @@ use function DI\autowire;
 use function DI\factory;
 use function DI\get;
 
-return [
+return [     
     // Connexion à la base : construite une seule fois via notre config/database.php existant
     Capsule::class => factory(function (): Capsule {
         $initDatabase = require __DIR__ . '/database.php';
