@@ -6,10 +6,11 @@ RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoload
 
 # Étape 2 : l'image finale avec PHP + Apache
 FROM php:8.3-apache
-
 RUN apt-get update \
     && apt-get install -y libzip-dev unzip \
     && docker-php-ext-install pdo pdo_mysql \
+    && a2dismod mpm_event mpm_worker 2>/dev/null || true \
+    && a2enmod mpm_prefork \
     && a2enmod rewrite \
     && { \
         echo '<Directory /var/www/html/public>'; \
