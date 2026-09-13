@@ -7,7 +7,7 @@ require __DIR__ . '/../vendor/autoload.php';
 use App\Model\Salle;
 use Dotenv\Dotenv;
 
-Dotenv::createImmutable(__DIR__ . '/..')->load();
+Dotenv::createImmutable(__DIR__ . '/..')->safeLoad();
 (require __DIR__ . '/../config/database.php')();
 
 $salles = [
