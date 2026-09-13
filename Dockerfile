@@ -3,9 +3,6 @@ FROM php:8.3-apache
 RUN apt-get update \
     && apt-get install -y libzip-dev unzip git curl \
     && docker-php-ext-install pdo pdo_mysql \
-    && rm -rf /etc/apache2/mods-enabled/mpm_event.* /etc/apache2/mods-enabled/mpm_worker.* /etc/apache2/mods-enabled/mpm_prefork.* \
-    && ln -s /etc/apache2/mods-available/mpm_prefork.load /etc/apache2/mods-enabled/mpm_prefork.load \
-    && ln -s /etc/apache2/mods-available/mpm_prefork.conf /etc/apache2/mods-enabled/mpm_prefork.conf \
     && a2enmod rewrite \
     && { \
         echo '<Directory /var/www/html/public>'; \
