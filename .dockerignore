@@ -4,9 +4,6 @@
 .env.*
 vendor
 tests
-database
-scripts
 docker-compose.yml
 Dockerfile
 README.md
-CHANGELOG.md
