@@ -2,11 +2,13 @@
     "name": "mariama-ndour/reservation-salles",
     "description": "Gestion des réservations de salles universitaires",
     "type": "project",
+    
     "autoload": {
-        "psr-4": {
-            "App\\": "src/"
-        }
-    },
+    "psr-4": {
+        "App\\": "src/",
+        "Database\\": "database/"
+    }
+},
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
